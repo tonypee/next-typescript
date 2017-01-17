@@ -1,0 +1,25 @@
+{
+  "name": "next-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "tsc",
+    "build": "next build",
+    "dev": "concurrently \"npm run watch:tsc\" \"next\"",
+    "start": "next start",
+    "tsc": "tsc",
+    "watch:tsc": "tsc --watch"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "next": "^2.0.0-beta.17"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.0",
+    "@types/react-dom": "^0.14.20",
+    "concurrently": "^3.1.0",
+    "typescript": "^2.1.5"
+  }
+}
