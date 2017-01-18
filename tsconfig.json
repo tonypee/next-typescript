@@ -1,15 +1,10 @@
 {
-    "compileOnSave": false,
     "compilerOptions": {        
         "moduleResolution": "node",
         "jsx": "react",
-        "target": "es2015",
+        "target": "es6",
         "module": "es6",        
         "noImplicitAny": false,
-        "sourceMap": true,
-        "outDir": "./"
-    },
-    "exclude": [
-		"node_modules"
-	]
+        "sourceMap": true        
+    }
 }
