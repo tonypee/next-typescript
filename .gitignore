@@ -1,4 +1,4 @@
 .next
 node_modules
-pages/*.js*
-components/*.js*
+./pages
+./components
