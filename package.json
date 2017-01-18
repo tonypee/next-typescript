@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "tsc",
     "build": "next build",
+    "predev": "tsc",
     "dev": "concurrently \"npm run watch:tsc\" \"next\"",
     "start": "next start",
     "tsc": "tsc",
