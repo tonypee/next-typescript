@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "tsc",
-    "build": "next build",
+    "build": "next build ./dist",
     "predev": "tsc",
-    "dev": "concurrently \"npm run watch:tsc\" \"next\"",
-    "start": "next start",
+    "dev": "concurrently \"npm run watch:tsc\" \"next ./dist\"",
+    "start": "next start ./dist",
     "tsc": "tsc",
     "watch:tsc": "tsc --watch"
   },
