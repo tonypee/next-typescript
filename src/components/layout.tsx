@@ -18,7 +18,7 @@ export default ({children = undefined, title = 'This is the default title'}) => 
     </header>
     {children}
     <footer>
-      I`m here to stay
+      I`m here to stay asd xx
     </footer>
   </div>
 )
