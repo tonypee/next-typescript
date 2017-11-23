@@ -1,10 +1,10 @@
 const config = {
-  apiKey: "AIzaSyBilLhz42EtQDZ4bs53-44-dg0NUdz2D9w",
-  authDomain: "parcelle-e3e74.firebaseapp.com",
-  databaseURL: "https://parcelle-e3e74.firebaseio.com",
-  projectId: "parcelle-e3e74",
-  storageBucket: "parcelle-e3e74.appspot.com",
-  messagingSenderId: "522605654322"
+  apiKey: "AIzaSyCW1Y0eWj_p6pEFprEN3fzKEYU3ejaVk48",
+  authDomain: "firestore-typescript-example.firebaseapp.com",
+  databaseURL: "https://firestore-typescript-example.firebaseio.com",
+  projectId: "firestore-typescript-example",
+  storageBucket: "",
+  messagingSenderId: "531206409450"
 };
 
 let firebase = require("firebase");

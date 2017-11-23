@@ -1,48 +1,38 @@
 import * as React from 'react';
 import Layout from '../components/layout';
-import db from '../db'
+import db from '../core/db'
 import { firestore } from 'firebase';
-import { ssToData } from '../core/utils';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import * as api from '../core/api';
 
 interface Props {
-  data:any[]
+  content:any[]
 }
 
+@observer
 export default class About extends React.Component<Props, Props> {
-
-  constructor() {
-    super()
-    this.state = {
-      data: [],
-    };
+  
+  @observable content;
+  
+  constructor(props) {
+    super(props)
+    this.content = props.content 
   }
-  static async getInitialProps ({ query }) {
+
+  static async getInitialProps({ query }) {
+    const content = await api.getAbout()
     return {
-      data: await db.collection('test').get().then(ssToData)
+      content,
     }
   }
-  
-  componentDidMount() {
-    this.setState({
-      data: this.props.data
-    });
 
-    db.collection("test").onSnapshot(ss => {
-      this.setState({
-        data: ssToData(ss)
-      })
-    })
-  }
   render() {
-    console.log(this.props.data)
     return (
       <Layout title="About us">
         <div>About us:</div>
-        {this.state.data.map((d, ix) => 
-          <div key={ix}>{d.message}</div>
-        )}
+        {this.content}
       </Layout>
     )
   }
 }
-

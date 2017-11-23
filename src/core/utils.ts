@@ -1,9 +1,9 @@
-export function toArray(ss:firestore.QuerySnapshot) {
-  const output = [];
-  ss.forEach(item => output.push(item))
-  return output;
-} 
+import { firestore } from 'firebase'
 
-export function ssToData(ss:firestore.QuerySnapshot) {
-  return toArray(ss).map(ss2 => ss2.data())
-} 
+export function collectionToObject(ss:firestore.QuerySnapshot) {
+  const output = {};
+  ss.forEach(item => {
+    output[item.id] = item.data();
+  })
+  return output;
+}

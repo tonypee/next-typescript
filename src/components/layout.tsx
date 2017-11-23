@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-export default ({children = undefined, title = 'This is the default title'}) => (
+export default ({children, title = 'This is the default title'}) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -14,11 +14,15 @@ export default ({children = undefined, title = 'This is the default title'}) => 
         <Link href="/"><a>Home</a></Link>|
         <Link href="/about"><a>About</a></Link>|
         <Link href="/contact"><a>Contact</a></Link>
+        <Link href="/todos"><a>Todos</a></Link>
       </nav>
     </header>
+    --- <br />
     {children}
     <footer>
-      I`m here to stay asd xx
+      --- <br />
+
+      Footer pls
     </footer>
   </div>
 )
