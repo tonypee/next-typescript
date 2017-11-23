@@ -2,7 +2,7 @@ import * as React from 'react';
 import Layout from '../components/layout';
 import db from '../core/db'
 import { firestore } from 'firebase';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import * as api from '../core/api';
 import { addTodo } from '../core/api';
@@ -13,7 +13,6 @@ interface Props {
 
 @observer
 export default class About extends React.Component<Props, Props> {
-  
   model: AboutModel;
 
   constructor(props) {
@@ -28,6 +27,16 @@ export default class About extends React.Component<Props, Props> {
     }
   }
 
+  onInputChange(e) {
+    this.model.inputValue = (e.target as any).value;
+  }
+
+  onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key == 'Enter') {
+      this.model.add((e.target as any).value)
+    }
+  }
+
   render() {
     return (
       <Layout title="About us">
@@ -39,8 +48,8 @@ export default class About extends React.Component<Props, Props> {
         <div>
           <input 
             value={this.model.inputValue} 
-            onChange={e => this.model.onInputChange(e)} 
-            onKeyPress={e => this.model.onInput(e)} 
+            onChange={e => this.onInputChange(e)} 
+            onKeyPress={e => this.onInputKeyPress(e)} 
           />
           {this.model.inputValue}
         </div>
@@ -61,18 +70,12 @@ class AboutModel {
     })
   }
 
-  onInputChange(e) {
-    this.inputValue = (e.target as any).value;
+  @action add(docId) {
+    api.addTodo(this.inputValue)
+    this.inputValue = ''
   }
 
-  onInput(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key == 'Enter') {
-      api.addTodo(this.inputValue)
-      this.inputValue = ''
-    }
-  }
-
-  delete(docId) {
+  @action delete(docId) {
     api.deleteTodo(docId)
   }
 }
