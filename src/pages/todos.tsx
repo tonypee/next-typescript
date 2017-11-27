@@ -28,7 +28,7 @@ export default class About extends React.Component<Props, Props> {
   }
 
   onInputChange(e) {
-    this.model.inputValue = (e.target as any).value;
+    this.model.setInput((e.target as any).value);
   }
 
   onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -77,5 +77,9 @@ class AboutModel {
 
   @action delete(docId) {
     api.deleteTodo(docId)
+  }
+
+  @action setInput(input:string) {
+    this.inputValue = input;
   }
 }
