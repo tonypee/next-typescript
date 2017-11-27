@@ -6,6 +6,7 @@
   "description": "Next.js / Typescript / Firebase, hosted on cloud functions",
   "repository": "https://github.com/tonypee/nextjs-typescript-firebase-hosted.git",
   "scripts": {
+    "install": "mkdir dist && mkdir dist/pages",
     "predeploy": "yarn && yarn build && cd dist && yarn",
     "deploy": "firebase deploy",
     "dev": "concurrently \"tsc --watch\" \"next ./dist\"",

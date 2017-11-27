@@ -21,3 +21,4 @@ try {
 
 export default firebase.firestore()
 
+export const TIMESTAMP = firebase.firestore.FieldValue.serverTimestamp()
