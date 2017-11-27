@@ -21,7 +21,7 @@ export default class About extends React.Component<Props, Props> {
   }
 
   static async getInitialProps({ query }) {
-    const content = await api.getAbout()
+    const content = await api.getPage('about')
     return {
       content,
     }
