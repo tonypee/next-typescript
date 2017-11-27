@@ -1,11 +1,41 @@
-Demo of [Next.js](https://github.com/zeit/next.js) and TypeScript
+# Next.js / typescript / firebase hosted
 
-## What doesn't work :(
+Based off the SSR sample in: https://github.com/firebase/functions-samples
 
-Can't pass additional setting to [ignore tsx files](https://github.com/zeit/next.js/blob/master/server/hot-reloader.js#L138) so app is updated twice    
+Added features are: 
+- combined client & server apps to share package.json dependancies
+- added typescript precompile step
+- simplified folder structure
 
-## My approach
+Host your SSR Next.js app on Cloud Functions with Firebase Hosting rewrite rules. Using a rewrite rule that catches **ALL** routes we can then host our SSR app on our Firebase Hosting URL instead of the Firebase Cloud Function URL.
 
-* Watch and compile tsx to js (ES6) for Next to process
-* VSCode workspace setting to hide js files
+## How to use
 
+```bash
+git clone https://github.com/tonypee/nextjs-typescript-firebase-hosted
+cd nextjs-typescript-firebase-hosted
+yarn
+```
+
+Set up firebase:
+- create a project through the [firebase web console](https://console.firebase.google.com/)
+- grab the projects ID from the web consoles URL: https://console.firebase.google.com/project/<projectId>
+- update the `.firebaserc` default project ID to the newly created project
+
+Install project:
+
+```bash
+yarn
+```
+
+Run Next.js development:
+
+```bash
+yarn dev
+```
+
+Deploy it to the cloud with Firebase
+
+```bash
+yarn deploy
+```

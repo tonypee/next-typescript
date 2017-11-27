@@ -8,10 +8,10 @@
         "module": "es6",        
         "noImplicitAny": false,
         "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "dist",
         "experimentalDecorators": true
     },
     "exclude": [
-		"node_modules"
+		"node_modules", "functions"
 	]
 }
