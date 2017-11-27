@@ -1,25 +1,32 @@
-import db from './db'
+import db, { TIMESTAMP } from './db'
 import { collectionToObject } from './utils'
 
-export function getAbout() {
-  return db.collection('pages').doc('about').get().then(doc => doc.data().content)
+export function getPage(pageId:string) {
+  return db.collection('pages').doc(pageId).get().then(doc => doc.data())
 }
 
-export function getContact() {
-  return db.collection('pages').doc('contact').get().then(doc => doc.data().content)
+export function getTodosRef(limit:number = 9999, orderAsc:boolean = true) {
+  return db.collection("todos")
+    .limit(limit)
+    .orderBy('createdAt', orderAsc ? 'asc' : 'desc')
 }
 
 export function getTodos() {
-  return db.collection('todos').get().then(collectionToObject)
+  return getTodosRef()
+    .get().then(ss => collectionToObject(ss))
 }
 
-export function watchTodos(onData: Function ) {
-  db.collection("todos").onSnapshot(ss => onData(collectionToObject(ss)))
+export function watchTodos(onData:Function, limit:number, orderAsc:boolean) {
+  return getTodosRef(limit, orderAsc)
+      .onSnapshot(ss => {
+        onData(collectionToObject(ss))
+      })
 }
 
 export function addTodo(todo:string) {
   return db.collection('todos').add({
-    todo
+    createdAt: TIMESTAMP,
+    todo,
   })
 }
 

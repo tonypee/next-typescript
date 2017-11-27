@@ -28,7 +28,7 @@ export default class About extends React.Component<Props, Props> {
   }
 
   onInputChange(e) {
-    this.model.setInput((e.target as any).value);
+    this.model.inputValue = (e.target as any).value;
   }
 
   onInputKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -41,6 +41,23 @@ export default class About extends React.Component<Props, Props> {
     return (
       <Layout title="About us">
         <div>Todos:</div>
+        
+        <div>
+          order: 
+          <a href="#" onClick={e => this.model.toggleOrder()}>
+            {this.model.orderAsc ? 'asc' : 'desc'}
+          </a>
+
+          limit: 
+          <select onChange={e => this.model.setLimit(e.target.value)}>
+            <option value={999}>-</option>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+          </select>
+        </div>
+
         {Object.entries(this.model.todos).map(([id, todo]) => 
           <div key={id}>{todo.todo} | <a href="#" onClick={e => this.model.delete(id)}>del</a></div>
         )}
@@ -53,6 +70,7 @@ export default class About extends React.Component<Props, Props> {
           />
           {this.model.inputValue}
         </div>
+        {this.model.saving && 'saving...'}
       </Layout>
     )
   }
@@ -61,25 +79,42 @@ export default class About extends React.Component<Props, Props> {
 class AboutModel {
   @observable todos:any = {};
   @observable inputValue:string = '';
+  @observable saving:boolean = false;
+  @observable orderAsc:boolean = true;
+  @observable limit:number = 99999;
+
+  unsubscribe = null;
 
   constructor(todos) {
     this.todos = todos;
+    this.updateWatch()
+  }
 
-    api.watchTodos(todos => {
+  updateWatch() {
+    this.unsubscribe && this.unsubscribe();
+    this.unsubscribe = api.watchTodos(todos => {
       this.todos = todos;
-    })
+    }, this.limit, this.orderAsc)
   }
 
-  @action add(docId) {
-    api.addTodo(this.inputValue)
+  @action async add(value) {
     this.inputValue = ''
+    this.saving = true;
+    await api.addTodo(value)
+    this.saving = false;
   }
-
+  
   @action delete(docId) {
     api.deleteTodo(docId)
   }
 
-  @action setInput(input:string) {
-    this.inputValue = input;
+  @action toggleOrder() {
+    this.orderAsc = !this.orderAsc;
+    this.updateWatch();
+  }
+  
+  @action setLimit(limit) {
+    this.limit = parseInt(limit);
+    this.updateWatch();
   }
 }
