@@ -6,14 +6,17 @@
   "description": "Next.js / Typescript / Firebase, hosted on cloud functions",
   "repository": "https://github.com/tonypee/nextjs-typescript-firebase-hosted.git",
   "scripts": {
-    "install": "mkdir dist && mkdir dist/pages",
-    "predeploy": "yarn && yarn build && cd dist && yarn",
+    "install": "mkdir -p dist dist/public dist/pages dist/static",
+    "predeploy": "yarn build && cd dist && yarn",
+    "serve": "firebase serve",
     "deploy": "firebase deploy",
-    "dev": "concurrently \"tsc --watch\" \"next ./dist\"",
+    "dev": "concurrently 'yarn watch-static' 'tsc --watch' 'next ./dist'",
     "build": "yarn clean && tsc && next build ./dist && cp package.json dist/package.json && yarn create-public",
     "start": "next start ./dist",
-    "clean": "rm -rf dist/",
-    "create-public": "mkdir dist/public && echo \"not used\" > dist/public/placeholder.html"
+    "clean": "rm -rf dist && yarn install",
+    "reset": "rm -rf node_modules dist && yarn",
+    "watch-static": "watch-run -i -p 'src/static/**' 'rm -rf dist/static && mkdir dist/static && cp src/static/* dist/static'",
+    "create-public": "mkdir dist/public/static && cp src/static/* dist/public/static && echo \"not used\" > dist/public/__placeholder.html"
   },
   "dependencies": {
     "@firebase/firestore": "^0.1.4",
@@ -25,7 +28,8 @@
     "mobx-react": "^4.3.5",
     "next": "beta",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "watch-run": "^1.2.5"
   },
   "devDependencies": {
     "@types/node": "^8.0.53",

@@ -10,15 +10,7 @@ interface Props {
   content:any[]
 }
 
-@observer
 export default class About extends React.Component<Props, Props> {
-  
-  @observable content;
-  
-  constructor(props) {
-    super(props)
-    this.content = props.content 
-  }
 
   static async getInitialProps({ query }) {
     const page = await api.getPage('about')
@@ -31,7 +23,7 @@ export default class About extends React.Component<Props, Props> {
     return (
       <Layout title="About us">
         <div>About us:</div>
-        {this.content}
+        {this.props.content}
       </Layout>
     )
   }

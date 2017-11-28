@@ -10,6 +10,9 @@ export default ({children, title = 'This is the default title'}) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
+      <p>
+        <img src="/static/logo.png" />
+      </p>
       <nav>
         <Link href="/"><a>Home</a></Link>|
         <Link href="/about"><a>About</a></Link>|
