@@ -21,6 +21,7 @@
   "dependencies": {
     "@firebase/firestore": "^0.1.4",
     "babel-runtime": "^6.26.0",
+    "csstips": "^0.2.2",
     "firebase": "^4.6.2",
     "firebase-admin": "^5.0.1",
     "firebase-functions": "^0.7.3",
@@ -29,6 +30,7 @@
     "next": "beta",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "typestyle": "^1.5.1",
     "watch-run": "^1.2.5"
   },
   "devDependencies": {
