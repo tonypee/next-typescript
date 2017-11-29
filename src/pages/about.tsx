@@ -27,10 +27,10 @@ export default class About extends React.Component<Props, Props> {
         <div>About us:</div>
         {this.props.content}
         <Horizontal>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
+          <div style={{ background: 'green'}}>1</div>
+          <div style={{ background: 'red'}}>2</div>
+          <div style={{ background: 'yellow'}}>3</div>
+          <div style={{ background: 'green'}}>4</div>
         </Horizontal> 
       </Layout>
     )

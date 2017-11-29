@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { MaxWidthIsland } from '../core/layout'
-import { getStyles } from 'typestyle'
+import { getStyles, style } from 'typestyle'
 
 export default class Layout extends React.Component<{ title: string }> {
 
@@ -12,7 +12,7 @@ export default class Layout extends React.Component<{ title: string }> {
     title = title || 'This is the default title';
     
     return (
-      <MaxWidthIsland>
+      <MaxWidthIsland style={{ background: '#e2e2e2'}}>
         <style>
           {getStyles()}
         </style>
@@ -23,15 +23,15 @@ export default class Layout extends React.Component<{ title: string }> {
               <meta charSet="utf-8" />
               <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <header>
+            <header  style={{ paddingBottom: 50 }}>
               <p>
                 <img src="/static/logo.png" />
               </p>
               <nav>
-                <Link href="/"><a>Home</a></Link>|
-                <Link href="/about"><a>About</a></Link>|
-                <Link href="/contact"><a>Contact</a></Link>
-                <Link href="/todos"><a>Todos</a></Link>
+                <LinkItem href="/" label="Home"></LinkItem> | 
+                <LinkItem href="/about" label="About"></LinkItem> | 
+                <LinkItem href="/contact" label="Contact"></LinkItem> |
+                <LinkItem href="/todos" label="Todos"></LinkItem>
               </nav>
             </header>
           </div>
@@ -41,3 +41,10 @@ export default class Layout extends React.Component<{ title: string }> {
     )
   }
 }
+
+const linkStyle = style({
+  padding: 10
+});
+
+const LinkItem = ({href, label}) => 
+  <Link href={href}><a className={linkStyle}>{label}</a></Link>
