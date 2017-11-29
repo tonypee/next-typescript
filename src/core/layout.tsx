@@ -33,7 +33,7 @@ export const MaxWidthIsland = props =>
       flexBasis: 'auto',
       flexShrink: 0,
       margin: '0 auto',
-      maxWidth: '960px',
+      maxWidth: props.width || 960,
       width: '100%',
     })} 
     style={props.style}
